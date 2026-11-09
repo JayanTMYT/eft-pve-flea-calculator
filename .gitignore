@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.env
+.env.*
+*.log
+.openai/
+.sites-runtime/
+.wrangler/
+*.tar.gz
+*.zip

@@ -1,0 +1,5 @@
+# Protect deployment and package changes through a repository ruleset that requires owner review.
+/.github/ @JayanTMYT
+/package.json @JayanTMYT
+/package-lock.json @JayanTMYT
+/scripts/ @JayanTMYT
