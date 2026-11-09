@@ -15,7 +15,3 @@ Do not enter personal details, passwords, tokens or other confidential informati
 GitHub Pages serves the static files. GitHub states that it logs and stores visitors' IP addresses for security purposes, whether or not the visitor is signed in. See [GitHub Pages data collection](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection) and [GitHub's privacy statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement).
 
 The site's build workflow reads public Tarkov.dev item data from GitHub's runner. Visitors download the resulting snapshot from the site itself; their item searches and custom inputs are not sent to Tarkov.dev. External links contact their destination only when a visitor follows them. No external fonts, scripts or images are loaded by the calculator at runtime.
-
-## Changes
-
-Review and update this notice before adding analytics, ads, user accounts, form submissions, cloud storage or direct third-party API calls. Storage technologies are not automatically exempt from privacy rules merely because they are localStorage instead of cookies. Assess applicable requirements before adding non-essential tracking or storage, and obtain consent before using technologies that require it.
