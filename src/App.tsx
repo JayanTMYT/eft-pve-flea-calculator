@@ -79,7 +79,7 @@ export default function Home(){
   const [pinned,setPinned]=useState<{item:string;quote:Quote}[]>([]),[editor,setEditor]=useState<{item:Item|null}|null>(null);
   const [intelligenceCentre,setIntelligenceCentre]=useState<IntelligenceLevel>(1);
   const rates=useMemo(()=>({...marketRates,intelligenceCentre}),[marketRates,intelligenceCentre]);
-  const items=useMemo(()=>mergeItems(catalogue,saved),[catalogue,saved]);
+  const items=useMemo(()=>mergeItems(catalogue,saved).filter(i=>!i.noFlea).sort((a,b)=>a.name.localeCompare(b.name,"en",{sensitivity:"base"})),[catalogue,saved]);
   const item=items.find(i=>i.id===selectedId)??SEEDS[0];
   useEffect(()=>{try{setSaved(parseSavedItems(JSON.parse(localStorage.getItem(STORAGE_KEY)??"[]")));}catch{setMessage("Saved browser items could not be read. The external catalogue is still available.");}
     let active=true;loadPublishedCatalogue().then(data=>{if(active){setCatalogue(data.items);setRates(data.rates);setCatalogueInfo({status:"Published PVE catalogue",date:data.fetchedAt});}}).catch(()=>{if(active)setCatalogueInfo({status:"Seed fallback · catalogue unavailable",date:""});});return()=>{active=false;};
@@ -90,7 +90,7 @@ export default function Home(){
   const saveItem=(entry:Item)=>{const next=[...saved.filter(i=>i.id!==entry.id),entry];if(!persist(next))return false;select(entry.id);setQuery("");setMessage(`${entry.name} saved in this browser. It will remain in the item list after reopening.`);return true;};
   const refresh=async()=>{setRefreshing(true);setMessage("");try{const data=await loadPublishedCatalogue(true);setCatalogue(data.items);setRates(data.rates);setCatalogueInfo({status:"Published PVE catalogue",date:data.fetchedAt});setMessage(`Reloaded the published catalogue (${number(data.items.length)} items). Upstream prices refresh during the daily site build.`);}catch{setMessage("Refresh unavailable. The existing catalogue and saved items remain usable.");}finally{setRefreshing(false);}};
   const filtered=items.filter(i=>`${i.name} ${i.short}`.toLowerCase().includes(query.toLowerCase().trim()));
-  const visible=filtered.slice(0,100);if(!visible.some(i=>i.id===item.id))visible.unshift(item);
+  const visible=filtered.slice(0,100);if(!visible.some(i=>i.id===item.id))visible.push(item);visible.sort((a,b)=>a.name.localeCompare(b.name,"en",{sensitivity:"base"}));
   const base=Number(baseText),quantity=Number(quantityText),price=Number(priceText),min=Number(minText),max=Number(maxText);
   const baseValid=baseText!==""&&validBase(base),quantityValid=quantityText!==""&&validInteger(quantity,1,MAX_QUANTITY),priceValid=priceText!==""&&validInteger(price,1,MAX_PRICE);
   const rangeValid=minText!==""&&maxText!==""&&validInteger(min,1,MAX_PRICE)&&validInteger(max,min,MAX_PRICE),manualValid=manualText===""||validInteger(Number(manualText),0,1e12);
