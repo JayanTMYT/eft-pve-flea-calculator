@@ -11,6 +11,6 @@
     "refresh:catalogue": "node scripts/refresh-catalogue.mjs",
     "audit:runtime": "npm audit --omit=dev --audit-level=high"
   },
-  "dependencies": {"lucide-react": "1.31.0", "react": "19.3.1", "react-dom": "19.3.1"},
+  "dependencies": {"lucide-react": "1.70.0", "react": "19.3.1", "react-dom": "19.3.1"},
   "devDependencies": {"@types/react": "19.2.14", "@types/react-dom": "19.2.3", "typescript": "5.9.3", "vite": "8.3.7"}
 }
